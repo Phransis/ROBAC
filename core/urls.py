@@ -31,8 +31,7 @@ router.register(r'folders', FolderViewSet, basename='folder')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/users/', include('users.urls')),
-    path('api/files/', include('files.urls')),
+    path('api/', include(router.urls)),
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -17,10 +17,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.temporary_password = raw_password
         user.save()
         # Optional: Send email here with temp password
-
         send_mail(
-            subject='Temporary Password',
-            message=f'Your temporary password is: {raw_password}',
+            subject='Your Account Has Been Created',
+            message=f"Hello {user.username},\n\nYour account has been created.\nTemporary password: {raw_password}\nPlease wait for approval before logging in.",
             from_email= None,
             recipient_list=[user.email],
             fail_silently=False,

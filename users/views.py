@@ -33,14 +33,14 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({'error': 'Not allowed to create users'}, status=403)
         return super().create(request, *args, **kwargs)
 
-@action(detail=True, methods=['post'])
-def approve(self, request, pk=None):
-    user = self.get_object()
-    if request.user.role not in ['super_admin_checker', 'admin_checker']:
-        return Response({'error': 'Only checkers can approve users'}, status=403)
-    user.is_approved = True
-    user.save()
-    return Response({'message': 'User approved successfully'})
+    @action(detail=True, methods=['post'])
+    def approve(self, request, pk=None):
+        user = self.get_object()
+        if request.user.role not in ['super_admin_checker', 'admin_checker']:
+            return Response({'error': 'Only checkers can approve users'}, status=403)
+        user.is_approved = True
+        user.save()
+        return Response({'message': 'User approved successfully'})
 
 # class UserViewSet(viewsets.ModelViewSet):
 #     queryset = User.objects.all()
